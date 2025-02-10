@@ -1,0 +1,7 @@
+{
+    "projects": [ {
+        "name": "splitter",
+        "path": "./contract/Splitter/splitter.tact",
+        "output": "./contract/Splitter/output"
+    }]
+}

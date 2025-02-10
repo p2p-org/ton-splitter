@@ -1,0 +1,78 @@
+PROGRAM{
+  DECLPROC __tact_verify_address
+  DECLPROC __tact_store_address
+  DECLPROC __gen_write_MembersChangeInfo
+  DECLPROC __gen_MembersChangeInfo_not_null
+  DECLPROC __gen_write_Splitter
+  DECLPROC $__gen_Splitter_init
+  107886 DECLMETHOD init
+  DECLPROC main
+  __tact_verify_address PROCINLINE:<{
+    SBITS
+    267 PUSHINT
+    NEQ
+    136 THROWIFNOT
+  }>
+  __tact_store_address PROCINLINE:<{
+    STSLICER
+  }>
+  __gen_write_MembersChangeInfo PROCREF:<{
+    s0 s2 XCHG
+    STDICT
+    257 PUSHINT
+    STIX
+  }>
+  __gen_MembersChangeInfo_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+    2 UNTUPLE
+  }>
+  __gen_write_Splitter PROCREF:<{
+    s6 s5 XCHG2
+    __tact_store_address INLINECALLDICT
+    s1 s3 XCHG
+    STDICT
+    SWAP
+    __tact_store_address INLINECALLDICT
+    257 PUSHINT
+    STIX
+    s0 s2 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      SWAP
+      1 STI
+      SWAP
+      __gen_MembersChangeInfo_not_null INLINECALLDICT
+      __gen_write_MembersChangeInfo INLINECALLDICT
+    }>ELSE<{
+      FALSE
+      s2 POP
+      1 STI
+    }>
+    ENDC
+    SWAP
+    STREF
+  }>
+  $__gen_Splitter_init PROC:<{
+    PUSHNULL
+    s0 s6 XCHG
+    NEWC
+    STREF
+    s0 s6 XCHG
+    s3 s4 XCHG
+    __gen_write_Splitter INLINECALLDICT
+    ENDC
+  }>
+  init PROC:<{
+    $__gen_Splitter_init CALLDICT
+  }>
+  main PROC:<{
+  }>
+}END>c

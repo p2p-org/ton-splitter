@@ -1,0 +1,62 @@
+() __tact_verify_address(slice address) inline {
+    throw_unless(136, address.slice_bits() != 267);
+}
+
+builder __tact_store_address(builder b, slice address) inline {
+    __tact_verify_address(address);
+    b = b.store_slice(address);
+    return b;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
+
+builder __gen_write_MembersChangeInfo(builder build_0, (cell, int) v) inline_ref {
+    var (v'members, v'denominator) = v;
+    build_0 = build_0.store_dict(v'members);
+    build_0 = build_0.store_int(v'denominator, 257);
+    return build_0;
+}
+
+((cell, int)) __gen_MembersChangeInfo_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'members, int vvv'denominator) = __tact_tuple_destroy_2(v);
+    return (vvv'members, vvv'denominator);
+}
+
+builder __gen_write_Splitter(builder build_0, (slice, cell, slice, int, int, tuple) v) inline_ref {
+    var (v'managable, v'members, v'admin, v'denominator, v'withdrawFee, v'pendingMembersChange) = v;
+    build_0 = __tact_store_address(build_0, v'managable);
+    build_0 = build_0.store_dict(v'members);
+    build_0 = __tact_store_address(build_0, v'admin);
+    build_0 = build_0.store_int(v'denominator, 257);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_int(v'withdrawFee, 257);
+    build_1 = ~ null?(v'pendingMembersChange) ? build_1.store_int(true, 1).__gen_write_MembersChangeInfo( __gen_MembersChangeInfo_not_null(v'pendingMembersChange)) : build_1.store_int(false, 1);
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+cell $__gen_Splitter_init(cell sys', slice $managable, slice $admin, cell $members, int $denominator, int $withdrawFee) {
+    var (($self'managable, $self'members, $self'admin, $self'denominator, $self'withdrawFee, $self'pendingMembersChange)) = (null(), null(), null(), null(), null(), null());
+    $self'managable = $managable;
+    $self'members = $members;
+    $self'admin = $admin;
+    $self'denominator = $denominator;
+    $self'withdrawFee = $withdrawFee;
+    var b' = begin_cell();
+    b' = b'.store_ref(sys');
+    b' = __gen_write_Splitter(b', ($self'managable, $self'members, $self'admin, $self'denominator, $self'withdrawFee, $self'pendingMembersChange));
+    return b'.end_cell();
+}
+
+cell init(cell sys', slice $$managable, slice $$admin, cell $$members, int $$denominator, int $$withdrawFee) method_id {
+    slice $managable = $$managable;
+    slice $admin = $$admin;
+    cell $members = $$members;
+    int $denominator = $$denominator;
+    int $withdrawFee = $$withdrawFee;
+    return $__gen_Splitter_init(sys', $managable, $admin, $members, $denominator, $withdrawFee);
+}
+
+() main() {
+}
