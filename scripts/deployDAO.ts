@@ -81,11 +81,3 @@ export async function run(provider: NetworkProvider) {
 
     ui.write(`DAO deployed at ${dao.address}`);
 }
-// pool kQBZMclCtHLaFBh1R3BKfa5ddb1-J6EEJAITVoIfSsCp6BfQ
-// 4 members
-// 0QAg0sGUyZ_hryBZYWZYpuUCVHvrbglAT96mJ4Xy7Orqnh_T 1
-// 0QDnSzsJIlCDs9dLD7PRtkYO-ycqZ04VjbGsNiXE9Q6uCiqC 1
-// 0QBOI36-32t2rHCTnIuBh_oxLTj3o8bjMGP5MeVKEFQMp1i0 1
-// 0QDh5kmc0BZikebWu1zyhoiIglN3IldqKvpkkkIh-cvKsME- 1
-
-// deployed to EQCf_j9apB4AOqvQYa2k2lhOfSWV-Noo1z0wHu3_4AYe-Ohu
