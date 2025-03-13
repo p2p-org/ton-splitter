@@ -5,16 +5,16 @@ import { DAOWithSplitter } from '../wrappers/DAO';
 export async function run(provider: NetworkProvider) {
     const ui = provider.ui();
 
-    // Input the DAO contract address
-    const daoAddress = await ui.inputAddress('Enter the DAO address: ');
+    // Input the DAO/Splitter contract address
+    const daoAddress = await ui.inputAddress('Enter the DAO/Splitter address: ');
 
-    // Open the DAO contract
+    // Open the DAO/Splitter contract
     const dao = provider.open(DAOWithSplitter.fromAddress(daoAddress));
 
-    // Verify this is a valid DAO by checking if it has members
+    // Verify this is a valid DAO/Splitter by calling a known get method
     const membersCount = await dao.getMembersCount();
     if (membersCount <= 0) {
-        ui.write('Invalid DAO - no members found');
+        ui.write('Invalid DAO/Splitter - no members found');
         return;
     }
 
