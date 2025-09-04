@@ -1,5 +1,11 @@
 # ton-splitter
 
+This project is a modified version of https://github.com/tonwhales/nominators-dao. 
+
+It introduces `@ton/blueprint` to the project for
+- updated Tact compiler
+- easy to use scripts to interact with the contract
+
 ## Project structure
 
 -   `contracts` - source code of all the smart contracts of the project and their dependencies.
